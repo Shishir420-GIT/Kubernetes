@@ -1,0 +1,23 @@
+# Deployment: To handle upgrade, changes and rollout, it will create replica set as well
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    env: demo
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      env: demo
